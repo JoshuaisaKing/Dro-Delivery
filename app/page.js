@@ -1,8 +1,8 @@
 "use client"
-import GoogleMapSection from '@/components/Home/GoogleMapSection'
-import SearchSection from '@/components/Home/SearchSection'
-import { sourcecontext } from '@/context/sourcecontext'
-import { destinationcontext } from '@/context/destinationcontext'
+import GoogleMapSection from '../components/Home/GoogleMapSection'
+import SearchSection from '../components/Home/SearchSection'
+import { sourcecontext } from '../context/sourcecontext'
+import { destinationcontext } from '../context/destinationcontext'
 import { UserButton } from '@clerk/nextjs'
 import Image from 'next/image'
 import { useContext, useState } from 'react'
@@ -19,13 +19,16 @@ export default function Home() {
         libraries={['places']}
         googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_API_KEY}>
     <div className='p-6 grid grid-cols-1 md:grid-cols-3 gap-5'>
-      <div>
+      <div className='SearchSection'>
         <SearchSection/>
+        <pb/>
+        {/*<div className='attributeSection'>
+            <a className='' href="https://www.flaticon.com/free-icons/drone">Icons created by Pixel perfect - Flaticon</a>
+  </div>*/}
       </div>
-      <div className='col-span-2'>
+      <div className='col-span-2 MapSection'>
         <GoogleMapSection/>
       </div>
-      
     </div>
     </LoadScript>
     </destinationcontext.Provider>

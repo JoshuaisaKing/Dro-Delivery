@@ -23,7 +23,7 @@ function Header() {
   return (
     <div className='p-2 pb-2 pl-15 border-b-[1px] border-gray-700 flex items-center justify-between'>
         <div className='flex gap-24 items-center'>
-            <Image src='/logo.png' width={200} height={300} alt='Logo'/>
+            <Image src='/logo.png' width={200} height={300} alt='Logo' priority/>
 
             <div className='flex gap-24 items-center'>
                 {HeaderMenu.map((item)=>(

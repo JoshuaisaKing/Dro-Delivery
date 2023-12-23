@@ -26,8 +26,21 @@ body {
     rgb(var(--background-start-rgb));
   overflow-y: hidden; /* Hide vertical scrollbar */
   overflow-x: hidden;
+  ::-webkit-scrollbar {
+    display: none;
+}
 }
 
-.leaflet-container{
-  height: 230%;
+.attributeSection{
+  color: #ffffff69;
+}
+
+.SearchSection{
+  color: #ffffffbe;
+}
+.MapSection{
+  height: 5%;
+}
+.help{
+  color: white;
 }

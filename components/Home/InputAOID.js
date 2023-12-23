@@ -1,6 +1,6 @@
 "use client"
-import { destinationcontext } from '@/context/destinationcontext';
-import { sourcecontext } from '@/context/sourcecontext';
+import { destinationcontext } from '../../context/destinationcontext';
+import { sourcecontext } from '../../context/sourcecontext';
 import Image from 'next/image'
 import React, { useContext, useEffect, useState } from 'react'
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete'
@@ -22,8 +22,6 @@ function InputAOID({type}) {
     const service = new google.maps.places.PlacesService(document.createElement('div'));
     service.getDetails({placeId},(place,status)=>{
       if(status==='OK'&& place.geometry && place.geometry.location){
-        console.log(place.geometry.location.lat());
-        console.log(place.geometry.location.lng());
         if(type=='Start'){
           setSource({
             lat:place.geometry.location.lat(),

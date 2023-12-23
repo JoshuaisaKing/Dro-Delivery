@@ -1,12 +1,12 @@
 "use client"
 import React, { useContext, useEffect, useState } from 'react'
-import { GoogleMap, MarkerF, OverlayView, useJsApiLoader } from '@react-google-maps/api';
-import { sourcecontext } from '@/context/sourcecontext';
-import { destinationcontext } from '@/context/destinationcontext';
+import { GoogleMap, MarkerF, OverlayView, useJsApiLoader , PolylineF ,CircleF} from '@react-google-maps/api';
+import { sourcecontext } from '../../context/sourcecontext';
+import { destinationcontext } from '../../context/destinationcontext';
 
 function GoogleMapSection() {
-  const {source,setSource} =useContext(sourcecontext);
-  const {destination,setDestionation} = useContext(destinationcontext);
+  const {source,setSource} = useContext(sourcecontext);
+  const {destination,setDestination} = useContext(destinationcontext);
   const containerStyle = {
     width: '100%',
     height: window.innerWidth*0.425
@@ -16,6 +16,8 @@ function GoogleMapSection() {
     lat: -3.745,
     lng: -38.523
   });
+
+  const [center_dest,setCenterDest] = useState(); 
 
   useEffect(()=>{
     if(source!=[]&&map){
@@ -29,13 +31,16 @@ function GoogleMapSection() {
         lat:source.lat,
         lng:source.lng
       })
+      setCenterDest({
+        lat:destination.lat,
+        lng:destination.lng
+      })
     }
   },[source,destination])
 
   const [map, setMap] = React.useState(null)
 
   const onLoad = React.useCallback(function callback(map) {
-    // This is just an example of getting and using the map instance!!! don't just blindly copy!
     const bounds = new window.google.maps.LatLngBounds(center);
     map.fitBounds(bounds);
 
@@ -46,6 +51,12 @@ function GoogleMapSection() {
     setMap(null)
   }, [])
 
+  const flightCoordinates = [
+    { lat: source.lat, lng: source.lng },
+    { lat: destination.lat, lng: destination.lng },
+  ];
+
+  console.log(center,'                         lmao                                ',center_dest);
   return (
       <GoogleMap
         mapContainerStyle={containerStyle}
@@ -96,8 +107,26 @@ function GoogleMapSection() {
               </div>
           </OverlayView>
         </MarkerF>:null}
+
+        {destination.length!=[]&&source.length!=[]?
+        <PolylineF
+          path={flightCoordinates}
+          geodesic={true}
+                options={{
+                    fillColor: "red",
+                    strokeColor: "#ff2527",
+                    strokeOpacity: 0.65,
+                    strokeWeight: 1,
+                }}
+        />:null}
+        {destination?
+        <CircleF
+          center={center_dest}
+          radius={10}
+        />
+      :null}
       </GoogleMap>
   )
 }
 
-export default GoogleMapSection
+export default GoogleMapSection;
