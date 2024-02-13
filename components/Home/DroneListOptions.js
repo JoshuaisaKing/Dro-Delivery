@@ -9,7 +9,7 @@ function DroneListOptions(distance) {
   const router = useRouter();
   return (
     <div className='mt-5'>
-      <div className='overflow-auto h-[490px] w-100% pr-[15px]' id='lmao'>
+      <div className='overflow-auto h-[300px] w-100% pr-[15px]' id='lmao'>
         <h2 className='text-[22px] font-semibold'>Available Drones</h2>
         {droneData.map((item, index)=>(
             <div className={`cursor-pointer p-2 rounded-xl
